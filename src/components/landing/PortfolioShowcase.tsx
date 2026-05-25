@@ -46,7 +46,8 @@ export default function PortfolioShowcase() {
                           : project.title
                       }
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 896px"
+                      unoptimized
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                   ) : (
