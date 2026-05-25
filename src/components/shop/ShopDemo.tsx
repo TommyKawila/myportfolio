@@ -12,19 +12,25 @@ import {
 
 type CartMap = Record<string, number>;
 
+const EMPTY_CART: CartMap = {};
 const cartListeners = new Set<() => void>();
+let cachedCart: CartMap = EMPTY_CART;
+let cachedCartJson = "";
 
-function readCart(): CartMap {
+function parseCart(raw: string | null): CartMap {
+  if (!raw) return EMPTY_CART;
   try {
-    const raw = localStorage.getItem(CART_STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as CartMap) : {};
+    return JSON.parse(raw) as CartMap;
   } catch {
-    return {};
+    return EMPTY_CART;
   }
 }
 
 function saveCart(cart: CartMap) {
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  const nextJson = JSON.stringify(cart);
+  localStorage.setItem(CART_STORAGE_KEY, nextJson);
+  cachedCartJson = nextJson;
+  cachedCart = cart;
   cartListeners.forEach((listener) => listener());
 }
 
@@ -34,11 +40,17 @@ function subscribeCart(listener: () => void) {
 }
 
 function getCartSnapshot(): CartMap {
-  return readCart();
+  const raw = localStorage.getItem(CART_STORAGE_KEY);
+  const json = raw ?? "";
+  if (json !== cachedCartJson) {
+    cachedCartJson = json;
+    cachedCart = parseCart(raw);
+  }
+  return cachedCart;
 }
 
 function getServerCartSnapshot(): CartMap {
-  return {};
+  return EMPTY_CART;
 }
 
 export default function ShopDemo() {
@@ -68,7 +80,7 @@ export default function ShopDemo() {
   };
 
   const clearCart = () => {
-    persist({});
+    persist(EMPTY_CART);
     setCheckoutMsg("");
   };
 
@@ -92,7 +104,7 @@ export default function ShopDemo() {
   const handleCheckout = () => {
     if (itemCount === 0) return;
     setCheckoutMsg(`Order placed · ${formatPrice(total)} · Cart synced offline`);
-    persist({});
+    persist(EMPTY_CART);
   };
 
   const cartSummary = mounted
