@@ -23,15 +23,15 @@ export default async function DashboardPage() {
         <div className="flex h-10 w-10 items-center justify-center">
           <BrandIcon />
         </div>
-        <h1 className="mt-6 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="mt-6 text-2xl font-semibold tracking-tight text-slate-100">
           Profile unavailable
         </h1>
-        <p className="mt-3 max-w-md text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+        <p className="mt-3 max-w-md text-sm leading-6 text-slate-400">
           {result.error ?? "We could not load your profile. Please try again later."}
         </p>
         <Link
           href="/login?redirect=/dashboard"
-          className="mt-8 inline-flex h-10 items-center rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+          className="mt-8 inline-flex h-10 items-center rounded-lg bg-slate-100 px-4 text-sm font-medium text-slate-950 transition-colors hover:bg-white"
         >
           Go to sign in
         </Link>

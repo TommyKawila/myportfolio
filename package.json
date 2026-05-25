@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
@@ -12,7 +12,8 @@
     "vercel:prod": "vercel --prod",
     "deploy:guide": "bash scripts/deploy-guide.sh",
     "generate:icons": "node scripts/generate-pwa-icons.mjs",
-    "prebuild": "npm run generate:icons"
+    "generate:shop": "node scripts/generate-shop-products.mjs",
+    "prebuild": "npm run generate:icons && npm run generate:shop"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

@@ -20,7 +20,7 @@ export default function ProfileAvatar({
 
   return (
     <div
-      className={`relative ${className} shrink-0 overflow-hidden rounded-full bg-zinc-100 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800`}
+      className={`relative ${className} shrink-0 overflow-hidden rounded-full bg-slate-800 ring-1 ring-slate-700`}
     >
       {avatarUrl ? (
         <Image
@@ -33,7 +33,7 @@ export default function ProfileAvatar({
       ) : (
         <div
           aria-hidden
-          className={`flex h-full w-full items-center justify-center font-semibold text-zinc-500 ${text}`}
+          className={`flex h-full w-full items-center justify-center bg-slate-800 font-semibold text-slate-300 ${text}`}
         >
           {name.charAt(0).toUpperCase()}
         </div>

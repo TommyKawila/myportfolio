@@ -37,14 +37,10 @@ export default function PortfolioShowcase() {
             >
               <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/30 transition-colors hover:border-slate-600 hover:bg-slate-900/50">
                 <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-slate-900">
-                  {"image" in project && project.image ? (
+                  {project.image ? (
                     <Image
                       src={project.image}
-                      alt={
-                        "imageAlt" in project && project.imageAlt
-                          ? project.imageAlt
-                          : project.title
-                      }
+                      alt={project.imageAlt ?? project.title}
                       fill
                       unoptimized
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px"
@@ -85,14 +81,12 @@ export default function PortfolioShowcase() {
                       </li>
                     ))}
                   </ul>
-                  {"liveUrl" in project && project.liveUrl && (
+                  {project.liveUrl && (
                     <Link
                       href={project.liveUrl}
                       className="mt-5 inline-flex h-10 w-fit items-center rounded-lg bg-slate-100 px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-white"
                     >
-                      {"liveLabel" in project && project.liveLabel
-                        ? project.liveLabel
-                        : "View Project"}
+                      {project.liveLabel ?? "View Project"}
                     </Link>
                   )}
                 </div>
